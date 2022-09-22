@@ -1,17 +1,21 @@
 import React from "react";
+import { Todo } from "../App";
 import CheckIcon from "./icons/CheckIcon";
 import TrashIcon from "./icons/TrashIcon";
 import Button from "./shared/Button";
 
-export default function TodoItem() {
+
+interface Props{
+  todo: Todo,
+}
+
+export default function TodoItem(props: Props) {
   return (
-    <li className="max-w-xl bg-slate-200 rounded-md mb-2 p-6 shadow-sm">
-      <h3 className="text-2xl font-bold text-slate-800">Title</h3>
-      <small className="text-slate-400">Datum: 01.02.2022</small>
+    <li className={`max-w-xl  rounded-md mb-2 p-6 shadow-sm ${props.todo.todoStatus === "fulfilled" ? "bg-emerald-300" : "bg-slate-200"}`}>
+      <h3 className="text-2xl font-bold text-slate-800">{props.todo.title}</h3>
+      <small className="text-slate-400">{props.todo.date}</small>
       <p className="text-slate-600 my-4">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis
-        blanditiis eaque dolor aperiam. Possimus at aut commodi ipsum nesciunt
-        deserunt...
+        {props.todo.content}
       </p>
       <div className="flex items-center">
         <Button status="primary" >Read More</Button>
@@ -21,7 +25,6 @@ export default function TodoItem() {
         <Button status="success">
           <CheckIcon/>
         </Button>
-        <Button status="success">halllo</Button>
       </div>
     </li>
   );
