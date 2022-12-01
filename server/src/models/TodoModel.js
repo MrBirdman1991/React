@@ -5,7 +5,7 @@ const todoSchema = new Schema({
     title: {type: String, required: true},
     content: {type: String, required: true},
     date: { type: Date, default: Date.now },
-    todoStatus: {type: String, required: true}
+    todoStatus: {type: String, required: true, default: "pending"}
 });
 
 const TodoModel = mongoose.model("Todo", todoSchema);
