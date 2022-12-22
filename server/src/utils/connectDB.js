@@ -6,7 +6,7 @@ export function connect(){
       retryWrites: true,
     })
     .then((res) => {
-      console.log("database and server are running");
+      console.log("database and server are running 🦄🦄🦄");
     })
     .catch((err) => {
       console.log(err);

@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { connect } from "./utils/connectDB.js";
 import todoRoutes from "./routes/todo.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 const server = express();
 const PORT = process.env.PORT || 8080;
@@ -12,6 +13,7 @@ server.use(cors({
 }));
 
 server.use("/api/v1/todos", todoRoutes);
+server.use("/api/v1/users", userRoutes);
 
 server.listen(PORT, async () => {
   await connect();
