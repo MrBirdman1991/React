@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export function connect(){
    return mongoose
-    .connect("mongodb+srv://schwobsi:4forGlesa@cluster0.zxwti.mongodb.net/dbOne", {
+    .connect(process.env.DB_URI, {
       retryWrites: true,
     })
     .then((res) => {

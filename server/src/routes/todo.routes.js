@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import { createTodo, deleteTodoById, getAllTodos, getTodoById, updateTodoById } from "../controllers/todos.controller.js";
+import { auth } from "../middlewares/auth.js";
 import { validate } from "../middlewares/validateResource.js";
 import { todoCreateValidation, todoUpdateValidation } from "../validation/todo.validation.js";
 
@@ -19,12 +20,12 @@ router.get("/:id", getTodoById);
 // @route   POST /api/v1/todos/create
 // @desc    create a new todo
 // @access  public
-router.post("/create",validate(todoCreateValidation) ,createTodo);
+router.post("/create",validate(todoCreateValidation), auth ,createTodo);
 
 // @route   PATCH /api/v1/todos/:id
 // @desc    updates a specific blogpost
 // @access  public
-router.patch("/:id",validate(todoUpdateValidation), updateTodoById);
+router.patch("/:id",validate(todoUpdateValidation),auth ,updateTodoById);
 
 // @route   DELETE /api/v1/todos/:id
 // @desc    deletes a specific blogpost by id

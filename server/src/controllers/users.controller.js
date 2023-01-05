@@ -39,7 +39,7 @@ export const loginUser = withErrorHandler(async (req, res, next) => {
         throw new HttpError({status: 401, message: "Wrong email or password"});
     }
    
-    const newJwt = jwt.sign({id: existingUser.id}, "super_secret_password");
-  
+    const newJwt = jwt.sign({id: existingUser.id}, process.env.JWT_SECRET, {expiresIn: "5h"});
+
     res.json(newJwt);
   });

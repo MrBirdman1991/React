@@ -6,6 +6,7 @@ export const createTodo = withErrorHandler(async (req, res, next) => {
   const todo = await TodoModel.create({
     title: req.body.title,
     content: req.body.content,
+    user: res.locals.userId
   });
   res.status(201).json(todo);
 });
@@ -30,13 +31,21 @@ export const getTodoById = withErrorHandler(async (req, res, next) => {
 export const updateTodoById = withErrorHandler(async (req, res, next) => {
   const id = req.params.id;
 
-  const updatedTodo = await TodoModel.findByIdAndUpdate(
-    id,
-    { ...req.body },
-    { new: true }
-  );
+  const existingTodo = await TodoModel.findById(id);
 
-  res.json(updatedTodo);
+  if(res.locals.userId != existingTodo.user){
+    throw new HttpError({status: 401, message: "verarsch mich nicht"})
+  }
+
+  //const updatedTodo = await TodoModel.findByIdAndUpdate(
+  //  id,
+  //  { ...req.body },
+  //  { new: true }
+  //);
+
+  console.log(existingTodo);
+
+  res.json(existingTodo);
 });
 
 export const deleteTodoById = withErrorHandler(async (req, res, next) => {
